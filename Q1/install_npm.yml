@@ -1,0 +1,14 @@
+---
+- name: Install npm on webservers
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Install npm
+      package:
+        name: npm
+        state: present
+    - name: Copy example.txt to remote servers
+      copy:
+        src: /path/to/example.txt
+        dest: /home/user/example.txt
+        mode: '0644'
