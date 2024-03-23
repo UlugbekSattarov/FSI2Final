@@ -1,0 +1,13 @@
+--- 
+- name: Copy file and manage permissions
+  hosts: webservers
+  become: yes  # You might need: become_method: sudo
+
+  tasks:
+    - name: Copy a file
+      copy:
+        src: /Users/yourmacuser/path/to/local/file.txt   
+        dest: /path/on/remote/server/file.txt
+        owner: webuser  
+        group: webgroup 
+        mode: '0644' 

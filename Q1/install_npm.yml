@@ -1,14 +1,16 @@
 ---
-- name: Install npm on webservers
+- name: Install npm on web servers 
   hosts: webservers
-  become: yes
+  become: yes  # Use sudo privileges on remote servers
+
   tasks:
-    - name: Install npm
-      package:
-        name: npm
+    - name: Ensure Node.js is present (Recommended)
+      homebrew: 
+        name: node
         state: present
-    - name: Copy example.txt to remote servers
-      copy:
-        src: /path/to/example.txt
-        dest: /home/user/example.txt
-        mode: '0644'
+
+    - name: Install npm 
+      # npm mostly comes with Node.js; check if separate installation needed
+      homebrew:
+        name: npm
+        state: present 
